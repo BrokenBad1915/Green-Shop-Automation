@@ -1,10 +1,53 @@
+# import os
+# import shutil
+
+# def copy_all_images(source_folder, target_folder, starting_count):
+#     # Creating target folder if it doesn't exist
+#     os.makedirs(target_folder, exist_ok=True)
+
+#     count = starting_count
+
+#     for root, dirs, files in os.walk(source_folder):
+#         for file in files:
+#             if file.lower().endswith(('.png', '.jpg', '.jpeg')):
+#                 source_path = os.path.join(root, file)
+#                 target_path = os.path.join(target_folder, f"image_{count}.jpg")
+
+#                 # Check if the target file already exists, and increment count if needed
+#                 while os.path.exists(target_path):
+#                     count += 1
+#                     target_path = os.path.join(target_folder, f"image_{count}.jpg")
+
+#                 shutil.copyfile(source_path, target_path)
+
+#                 count += 1
+
+#     return count
+
+# def main():
+#     # Set the desired parameters
+#     source_folders = ["Orange2", "Orange3", "Orange4", "Orange5"]
+#     target_folder = "Orange1"
+#     starting_count = 1
+
+#     # Copy all images from source folders to target folder
+#     for source_folder in source_folders:
+#         starting_count = copy_all_images(source_folder, target_folder, starting_count)
+
+#     print(f"Image copy complete. Target folder: {target_folder}")
+
+# if __name__ == "__main__":
+#     main()
+
+
+
 import streamlit as st
 import os
 import cv2
 
-def open_camera(product_name):
+def open_camera(product_name, weight_ordered, quantity):
 
-    camo_device_id = 1
+    camo_device_id = 0
     cam = cv2.VideoCapture(camo_device_id)
 
     if not cam.isOpened():
@@ -30,7 +73,7 @@ def open_camera(product_name):
         cv2.putText(face, str(count), (50, 50), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 2)
         cv2.imshow('Face Cropper', face)
 
-        if cv2.waitKey(1) == 13 or count == 20:
+        if cv2.waitKey(1) == 13 or count == 100:
             break
 
     cam.release()
@@ -68,3 +111,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+
