@@ -88,7 +88,7 @@ def open_camera(product_name, weight_ordered, quantity):
 # Function to open another Python file
 def open_another_file():
     st.subheader("Green Shop Automation")
-    subprocess.Popen(["streamlit", "run", "streamlit_checkout.py"])
+    subprocess.Popen(["streamlit", "run", "checkout_strlit.py"])
 
 # Main function
 def main():

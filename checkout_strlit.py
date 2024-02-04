@@ -10,7 +10,7 @@ st.set_page_config(layout="wide")
 col1, col2 = st.columns([0.3, 0.7])
 
 API_URL = "https://api-inference.huggingface.co/models/facebook/detr-resnet-50"
-headers = {"Authorization": "Bearer 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"}
+headers = {"Authorization": "Bearer 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"}
 
 def query(filename):
     with open(filename, "rb") as f:
@@ -28,10 +28,22 @@ def cnt(output):
             cost[x["label"]] =1
     return cost
 
+def price(prediction):
+    allowed=['apple','banana','orange']
+    weight_dict={
+        'apple':200,
+        'banana':118,
+        'orange':125
+    }
+    weight=0
+    for i in prediction:
+        if i in allowed:
+            weight+=prediction[i]*weight_dict[i]
+    return weight
 
-output=''
 
-def capture_video():
+
+def capture_video(old):
     cap = cv2.VideoCapture(0)
     frame_placeholder = st.empty()
     attention = [0, 0]
@@ -58,21 +70,21 @@ def capture_video():
             channels="RGB",
             use_column_width=True,
         )
-        if cv2.waitKey(1) & 0xFF == ord("q"):
+
+        with col1:
+            print(output)
+            if output!=old:
+                st.write(price(detection))
+        old=output
+
+        if cv2.waitKey(1)  & 0xff==ord('q'):
             break
     cap.release()
 
 
-with col1:
-    st.title("Bill")
-    # st.text_area("Conversation:", value=bill_dat, height=400, key="conversation_area")
-    if st.button("Send"):
-        print(output)
-    # conversation_text = "\n".join(conversation_history)
-    st.text_area("Conversation:", value=output, height=400, key="conversation_area")
-    # capture_video()
     
 
 with col2:
     st.subheader("Livestream")
-    capture_video()
+    old=''
+    capture_video(old)
