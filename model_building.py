@@ -19,5 +19,5 @@ data=np.array(data)
 print(data.shape)
 df=pd.DataFrame(data)
 print(df.shape)
-df['label']=labels
-print(df.info)
+# df['label']=labes
+
