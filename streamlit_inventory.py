@@ -26,8 +26,8 @@
 
 # def main():
 #     # Set the desired parameters
-#     source_folders = ["Orange2", "Orange3", "Orange4", "Orange5"]
-#     target_folder = "Orange1"
+#     source_folders = ['Mixed_Fruit2', 'Mixed_Fruit3', 'Mixed_Fruit4', 'Mixed_Fruit5', 'Mixed_Fruit6', 'Mixed_Fruit7', 'Mixed_Fruit8', 'Mixed_Fruit9', 'Mixed_Fruit10', 'Mixed_Fruit11', 'Mixed_Fruit12', 'Mixed_Fruit13', 'Mixed_Fruit14', 'Mixed_Fruit15']
+#     target_folder = "Mixed_Fruit1"
 #     starting_count = 1
 
 #     # Copy all images from source folders to target folder
