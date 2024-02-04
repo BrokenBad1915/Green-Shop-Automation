@@ -61,6 +61,54 @@
 #     image_path = os.path.join(input_folder, filename)
 #     detect_fruit_borders_in_cropped_image(image_path, output_folder)
 
+# import cv2
+# import numpy as np
+
+# def detect_fruit_borders_in_cropped_image(image_path):
+#     # Load the image
+#     image = cv2.imread(image_path)
+
+#     # Calculate cropping coordinates
+#     image_height = image.shape[0]
+#     desired_cropping_amount = 150  # Adjust as needed
+#     center_y = image_height // 2
+#     top_y = center_y - desired_cropping_amount
+#     bottom_y = center_y + desired_cropping_amount
+
+#     # Adjust for apple position (if needed)
+#     # Example: If the apple is slightly higher, adjust top_y upwards slightly
+
+#     # Crop the image
+#     cropped_image = image[top_y:bottom_y, :]  # Adjust width coordinates as needed
+#     print(cropped_image.shape)
+
+#     # Proceed with fruit border detection
+#     hsv = cv2.cvtColor(cropped_image, cv2.COLOR_BGR2HSV)
+#     lower_bounds = np.array([0, 50, 50])
+#     upper_bounds = np.array([30, 255, 255])
+#     mask = cv2.inRange(hsv, lower_bounds, upper_bounds)
+#     kernel = np.ones((5, 5), np.uint8)
+#     mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
+#     mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
+#     contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+#     # Draw bounding boxes around fruit contours in the cropped image
+#     for contour in contours:
+#         x, y, w, h = cv2.boundingRect(contour)
+#         cv2.rectangle(cropped_image, (x, y), (x+w, y+h), (0, 255, 0), 2)
+
+#     # Display the result of the cropped image with borders
+#     cv2.imshow('Cropped Image with Fruit Borders', cropped_image)
+#     cv2.waitKey(0)
+#     cv2.destroyAllWindows()
+
+# # Path to your image
+# image_path = r'C:\Users\ronit\OneDrive\Documents\GitHub\Green-Shop-Automation\Mixed_Fruit1\image_1.jpg'
+
+# # Detect fruit borders in the cropped image
+# detect_fruit_borders_in_cropped_image(image_path)
+
+
 import cv2
 import numpy as np
 
@@ -68,42 +116,24 @@ def detect_fruit_borders_in_cropped_image(image_path):
     # Load the image
     image = cv2.imread(image_path)
 
-    # Calculate cropping coordinates
-    image_height = image.shape[0]
-    desired_cropping_amount = 150  # Adjust as needed
-    center_y = image_height // 2
-    top_y = center_y - desired_cropping_amount
-    bottom_y = center_y + desired_cropping_amount
+    # Convert the image to HSV color space
+    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    new = cv2.GaussianBlur(hsv,(5,5),0)
+    edges=cv2.Canny(new,45,150)
 
-    # Adjust for apple position (if needed)
-    # Example: If the apple is slightly higher, adjust top_y upwards slightly
 
-    # Crop the image
-    cropped_image = image[top_y:bottom_y, :]  # Adjust width coordinates as needed
-    print(cropped_image.shape)
+    cv2.rectangle()
 
-    # Proceed with fruit border detection
-    hsv = cv2.cvtColor(cropped_image, cv2.COLOR_BGR2HSV)
-    lower_bounds = np.array([0, 50, 50])
-    upper_bounds = np.array([30, 255, 255])
-    mask = cv2.inRange(hsv, lower_bounds, upper_bounds)
-    kernel = np.ones((5, 5), np.uint8)
-    mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
-    mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
-    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-    # Draw bounding boxes around fruit contours in the cropped image
-    for contour in contours:
-        x, y, w, h = cv2.boundingRect(contour)
-        cv2.rectangle(cropped_image, (x, y), (x+w, y+h), (0, 255, 0), 2)
-
-    # Display the result of the cropped image with borders
-    cv2.imshow('Cropped Image with Fruit Borders', cropped_image)
+    # Display the result with individual fruit borders
+    cv2.imshow('Image with Individual Fruit Borders', edges)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
 # Path to your image
-image_path = r'C:\Users\ronit\OneDrive\Documents\GitHub\Green-Shop-Automation\Mixed_Fruit1\image_1.jpg'
+image_path = r'C:\Users\ronit\OneDrive\Documents\GitHub\Green-Shop-Automation\test_image2\image_1.jpg'
 
-# Detect fruit borders in the cropped image
+# Detect fruit borders in the image
 detect_fruit_borders_in_cropped_image(image_path)
+
+

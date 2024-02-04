@@ -78,7 +78,7 @@ def open_camera(product_name, weight_ordered, quantity):
         cv2.putText(face, str(count), (50, 50), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 2)
         cv2.imshow('Face Cropper', face)
 
-        if cv2.waitKey(1) == 13 or count == 100:
+        if cv2.waitKey(1) == 13 or count == 1:
             break
 
     cam.release()
