@@ -39,12 +39,12 @@ def price(prediction):
     for i in prediction:
         if i in allowed:
             weight+=prediction[i]*weight_dict[i]
-    return weight
+    return f'The total weight is: {weight} grams'
 
 
 
 def capture_video(old):
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
     frame_placeholder = st.empty()
     attention = [0, 0]
     # gaze = GazeTracking()
