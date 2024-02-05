@@ -10,7 +10,7 @@ st.set_page_config(layout="wide")
 col1, col2 = st.columns([0.3, 0.7])
 
 API_URL = "https://api-inference.huggingface.co/models/facebook/detr-resnet-50"
-headers = {"Authorization": "Bearer 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"}
+headers = {"Authorization": "Bearer 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"}
 
 def query(filename):
     with open(filename, "rb") as f:
@@ -30,16 +30,24 @@ def cnt(output):
 
 def price(prediction):
     allowed=['apple','banana','orange']
+    cost_dict={
+        'apple': 20,
+        'banana': 15,
+        'orange': 17
+    }
     weight_dict={
         'apple':200,
         'banana':118,
         'orange':125
     }
     weight=0
+    cost=0
     for i in prediction:
         if i in allowed:
             weight+=prediction[i]*weight_dict[i]
-    return f'The total weight is: {weight} grams'
+            cost=prediction[i]*cost_dict[i]
+    return f'''The total weight is: {weight} grams. \n
+                The total price is: {cost} Ruppees.'''
 
 
 
@@ -80,8 +88,6 @@ def capture_video(old):
         if cv2.waitKey(1)  & 0xff==ord('q'):
             break
     cap.release()
-
-
     
 
 with col2:
